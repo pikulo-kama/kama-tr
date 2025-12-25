@@ -1,7 +1,7 @@
 from typing import Optional
 
 from kutil.logger import get_logger
-from kamatr.provider import TextResourceProvider
+from kamatr.provider import TextResourceProvider, JsonTextResourceProvider
 from kamatr.resource import TextResource
 
 _logger = get_logger(__name__)
@@ -16,7 +16,7 @@ class TextResourceManager:
     handling locale state and string formatting for placeholders.
     """
 
-    def __init__(self, provider: TextResourceProvider):
+    def __init__(self, provider: TextResourceProvider = None):
         """
         Initializes the manager with a specific resource provider.
 
@@ -25,7 +25,7 @@ class TextResourceManager:
         """
 
         self.__text_resources: dict[str, TextResource] = {}
-        self.__provider = provider
+        self.__provider = provider or JsonTextResourceProvider()
         self.__current_locale = None
 
     def set_provider(self, provider: TextResourceProvider):
@@ -166,6 +166,6 @@ def _get_holder() -> TextResourceManager:
     global _manager
 
     if _manager is None:
-        _manager = TextResourceManager(TextResourceProvider())
+        _manager = TextResourceManager()
 
     return _manager

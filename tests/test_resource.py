@@ -31,7 +31,7 @@ class TestTextResource:
         resource = TextResource(resource_key="label_Settings", translations=translations)
 
         # uk_UA is not in the list, so it should return the key
-        assert resource.get("uk_UA") == "label_Settings"
+        assert resource.get("uk_UA") == "label_Settings_uk_UA"
 
     def test_get_translation_empty_list(self):
         """
@@ -41,7 +41,7 @@ class TestTextResource:
         from kamatr.resource import TextResource
 
         resource = TextResource(resource_key="label_Empty", translations=[])
-        assert resource.get("fr_FR") == "label_Empty"
+        assert resource.get("fr_FR") == "label_Empty_fr_FR"
 
     def test_get_translation_case_sensitivity(self):
         """
@@ -56,4 +56,4 @@ class TestTextResource:
         resource = TextResource(resource_key="label_Settings", translations=translations)
 
         # "en_us" (lowercase) will not match "en_US"
-        assert resource.get("en_us") == "label_Settings"
+        assert resource.get("en_us") == "label_Settings_en_us"

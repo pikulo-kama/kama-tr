@@ -29,7 +29,7 @@ class TextResource:
             if translation.locale == locale:
                 return translation.text
 
-        return self.resource_key
+        return f"{self.resource_key}_{locale}"
 
 
 @dataclasses.dataclass
