@@ -27,6 +27,7 @@ class TextResourceManager:
         self.__text_resources: dict[str, TextResource] = {}
         self.__provider = provider or JsonTextResourceProvider()
         self.__current_locale = None
+        self.__unique_locales = []
 
     def set_provider(self, provider: TextResourceProvider):
         """
@@ -38,6 +39,10 @@ class TextResourceManager:
 
         self.__provider = provider
         self.reload()
+
+    @property
+    def locales(self):
+        return self.__unique_locales
 
     @property
     def locale(self) -> str:
@@ -73,6 +78,8 @@ class TextResourceManager:
         Args:
             text_resource (TextResource): The resource object to register.
         """
+
+        self.__unique_locales = list(set(self.__unique_locales) | set(text_resource.locales))
         self.__text_resources[text_resource.resource_key] = text_resource
 
     def get(self, text_resource_key: str, *args):
@@ -118,6 +125,7 @@ class TextResourceManager:
         """
         Clears all registered text resources.
         """
+        self.__unique_locales = []
         self.__text_resources = {}
 
 

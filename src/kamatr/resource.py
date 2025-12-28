@@ -31,6 +31,10 @@ class TextResource:
 
         return f"{self.resource_key}_{locale}"
 
+    @property
+    def locales(self):
+        return [translation.locale for translation in self.translations]
+
 
 @dataclasses.dataclass
 class TextTranslation:
