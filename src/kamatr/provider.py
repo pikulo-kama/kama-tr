@@ -1,7 +1,7 @@
 import os
 from typing import Final
 
-from kutil.file_extension import JSON
+from kutil.file_type import JSON
 from kutil.file import get_runtime_root, read_file
 from kamatr.resource import TextResource, TextTranslation
 
@@ -39,7 +39,7 @@ class JsonTextResourceProvider(TextResourceProvider):
             defaulting to the "labels" resource defined via the JSON utility.
     """
 
-    FileName: Final[str] = JSON.add_to("labels")
+    FileName: Final[str] = JSON.add_extension("labels")
 
     def provide(self) -> list["TextResource"]:
         """
