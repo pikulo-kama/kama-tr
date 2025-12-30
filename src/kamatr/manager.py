@@ -1,7 +1,7 @@
 from typing import Optional
 
 from kutil.logger import get_logger
-from kamatr.provider import TextResourceProvider, JsonTextResourceProvider
+from kamatr.provider import TextResourceProvider
 from kamatr.resource import TextResource
 
 _logger = get_logger(__name__)
@@ -25,7 +25,7 @@ class TextResourceManager:
         """
 
         self.__text_resources: dict[str, TextResource] = {}
-        self.__provider = provider or JsonTextResourceProvider()
+        self.__provider = provider or TextResourceProvider()
         self.__current_locale = None
         self.__unique_locales = []
 
