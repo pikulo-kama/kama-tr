@@ -76,6 +76,20 @@ class TestTestResourceManager:
         manager.remove("greeting")
         assert manager.get("greeting") == "greeting"
 
+    def test_locales_getter(self, mock_provider):
+
+        from kamatr.manager import TextResourceManager
+
+        manager = TextResourceManager(mock_provider)
+        manager.reload()
+
+        assert len(manager.locales) == 2
+        assert "en_US" in manager.locales
+        assert "de_DE" in manager.locales
+
+        manager.remove("greeting")
+        assert manager.get("greeting") == "greeting"
+
     def test_singleton_helpers(self, mock_provider):
         """
         Tests the module-level functions 'tr', set_locale, and set_provider
